@@ -1,0 +1,19 @@
+#M = [[i+j for j in range(4)] for i in range(4)]
+#print(*list(M), sep='\n')
+
+a=[[1,2,3],[1,2,3],[1,2,3]]
+print(*a, sep='\n')
+#while (a[0] or a[1] or a[2]) != 'X':
+for i in range(len(a)):
+    for j in range(len(a[i])):
+        if a[0][j] == 'X':
+            break
+        elif a[1][j] == 'X':
+            break
+        elif a[2][j] == 'X':
+            break
+        #or a[1][j] != 'X' or a[2][j] != 'X':
+        c = int(input('Введите строку для крестика '))
+        g = int(input('Введите колонку для крестика '))
+        a[c][g] = 'X'
+        print(*a, sep='\n')
