@@ -1,19 +1,68 @@
-#M = [[i+j for j in range(4)] for i in range(4)]
-#print(*list(M), sep='\n')
+matrix = [[' ', ' ', ' '],[' ', ' ', ' '],[' ', ' ', ' ']]
+print(*matrix, sep='\n')
 
-a=[[1,2,3],[1,2,3],[1,2,3]]
-print(*a, sep='\n')
-#while (a[0] or a[1] or a[2]) != 'X':
-for i in range(len(a)):
-    for j in range(len(a[i])):
-        if a[0] == ['X','X','X']:
-            break
-        elif a[1] == ['X','X','X']:
-            break
-        elif a[2] == ['X','X','X']:
-            break
-        #or a[1][j] != 'X' or a[2][j] != 'X':
-        c = int(input('Введите строку для крестика '))
-        g = int(input('Введите колонку для крестика '))
-        a[c][g] = 'X'
-        print(*a, sep='\n')
+i = 0
+def count_player(count):
+    for i in range(9):
+        if i%2 == 0:
+            print("Ходит первый игрок")
+            print('Введите строку: ')
+            a = int(input())
+            print('Введите колонку: ')
+            b = int(input())
+            while a >= 3 and a < 0:
+                print("Введите значения от 0 до 2 ")
+            while b >= 3 and b < 0:
+                print("Введите значения от 0 до 2 ")
+        else:
+            print("Ходит второй игрок")
+            print('Введите строку: ')
+            a = int(input())
+            print('Введите колонку: ')
+            b = int(input())
+            while a >= 3 and a < 0:
+                print("Введите значения от 0 до 2 ")
+            while b >= 3 and b < 0:
+                print("Введите значения от 0 до 2 ")
+    place = [a,b]
+    return place
+
+def matrix_change(a,b,s,matrix):
+    if matrix[a][b] == ' ':
+        matrix[a][b] == s
+        return True
+    else:
+        return False
+
+def matrix_show(matrix):
+    i = 0
+    for i in range(3):
+        print(f"{i} {matrix[i][0]} {matrix[i][1]} {matrix[i][2]}")
+
+def check(matrix,count):
+    for i in range(3):
+        if matrix[i] != [' ',' ',' '] or (matrix[0][i] != ' ' and matrix[1][i] != ' ' and matrix[2][i] != ' '):
+            print('Победил игрок ')
+            return False
+        else:
+            i+=1
+        if (matrix[0][0] != ' ' and matrix[1][1] != ' ' and matrix[2][2] != ' ') or (matrix[0][2] != ' ' and matrix[1][1] != ' ' and matrix[2][0] != ' '):
+            print('Победил игрок ')
+            return False
+        else:
+            return True
+count = 1
+i = 1
+
+while check(matrix,count):
+    if i == 10:
+        print('Ничья')
+        break
+    place=count_player(count)
+    if i % 2 == 0:
+        s = 'X'
+    else:
+        s = '0'
+    if matrix_change(*place,s,matrix):
+        matrix_show(matrix)
+        count+=1
