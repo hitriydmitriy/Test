@@ -1,68 +1,76 @@
 matrix = [[' ', ' ', ' '],[' ', ' ', ' '],[' ', ' ', ' ']]
 print(*matrix, sep='\n')
 
-i = 0
-def count_player(count):
+
+def vvod(n):
+    a = 5
+    b = 5
     for i in range(9):
-        if i%2 == 0:
+        if n % 2!= 0:
             print("Ходит первый игрок")
-            print('Введите строку: ')
-            a = int(input())
-            print('Введите колонку: ')
-            b = int(input())
-            while a >= 3 and a < 0:
-                print("Введите значения от 0 до 2 ")
-            while b >= 3 and b < 0:
-                print("Введите значения от 0 до 2 ")
         else:
-            print("Ходит второй игрок")
-            print('Введите строку: ')
-            a = int(input())
-            print('Введите колонку: ')
-            b = int(input())
-            while a >= 3 and a < 0:
+            print('Ходит второй игрок')
+        while a >= 3 or a < 0:
+            try:
+                a = int(input('Введите строку: '))
+            except ValueError:
                 print("Введите значения от 0 до 2 ")
-            while b >= 3 and b < 0:
+            finally:
+                continue
+        while b >= 3 or b < 0:
+            try:
+                b = int(input('Введите колонку: '))
+            except ValueError:
                 print("Введите значения от 0 до 2 ")
-    place = [a,b]
-    return place
+            finally:
+                continue
+        place = [a,b]
+        return place
 
 def matrix_change(a,b,s,matrix):
     if matrix[a][b] == ' ':
-        matrix[a][b] == s
+        matrix[a][b] = s
         return True
     else:
         return False
 
 def matrix_show(matrix):
-    i = 0
     for i in range(3):
-        print(f"{i} {matrix[i][0]} {matrix[i][1]} {matrix[i][2]}")
+        print([matrix[i]])
 
-def check(matrix,count):
+def check(matrix,n):
     for i in range(3):
-        if matrix[i] != [' ',' ',' '] or (matrix[0][i] != ' ' and matrix[1][i] != ' ' and matrix[2][i] != ' '):
-            print('Победил игрок ')
-            return False
-        else:
-            i+=1
-        if (matrix[0][0] != ' ' and matrix[1][1] != ' ' and matrix[2][2] != ' ') or (matrix[0][2] != ' ' and matrix[1][1] != ' ' and matrix[2][0] != ' '):
-            print('Победил игрок ')
-            return False
+        if matrix[i] == [['X','X','X']]  or (matrix[0][1] == 'X' and matrix[1][i] == 'X' and matrix[2][i] == 'X') or (matrix[0][0] == 'X' and matrix[1][1] == 'X' and matrix[2][2] == 'X') or (matrix[0][2] == 'X' and matrix[1][1] == 'X' and matrix[2][0]=='X'):
+            print('Победил первый игрок')
+            break
+        if matrix[i] == [['0', '0', '0']] or (matrix[0][1] == '0' and matrix[1][i] == '0' and matrix[2][i] == '0') or (
+                matrix[0][0] == '0' and matrix[1][1] == '0' and matrix[2][2] == '0') or (
+                matrix[0][2] == '0' and matrix[1][1] == '0' and matrix[2][0] == '0'):
+            print('Победил второй игрок')
+            break
         else:
             return True
-count = 1
-i = 1
+n = 1
 
-while check(matrix,count):
-    if i == 10:
-        print('Ничья')
+while check(matrix,n):
+    if n == 10:
+        print('Draw')
         break
-    place=count_player(count)
-    if i % 2 == 0:
+    place=vvod(n)
+    if n % 2 != 0:
         s = 'X'
     else:
         s = '0'
     if matrix_change(*place,s,matrix):
         matrix_show(matrix)
-        count+=1
+        n+=1
+    else:
+        matrix_show(matrix)
+        print('zanyato')
+        continue
+
+
+
+
+
+
