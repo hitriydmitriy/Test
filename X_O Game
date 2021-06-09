@@ -1,7 +1,7 @@
 matrix = [[' ', ' ', ' '],[' ', ' ', ' '],[' ', ' ', ' ']]
 print(*matrix, sep='\n')
 
-
+#ввод координат
 def vvod(n):
     a = 5
     b = 5
@@ -27,6 +27,7 @@ def vvod(n):
         place = [a,b]
         return place
 
+#присвоение Х или 0
 def matrix_change(a,b,s,matrix):
     if matrix[a][b] == ' ':
         matrix[a][b] = s
@@ -34,27 +35,38 @@ def matrix_change(a,b,s,matrix):
     else:
         return False
 
+#Отображение массива после ввода координат
 def matrix_show(matrix):
     for i in range(3):
         print([matrix[i]])
 
+#Условие победы
 def check(matrix,n):
+    if n % 2 == 0:
+        s = 'Первый игрок'
+    else:
+        s = 'Второй игрок'
     for i in range(3):
-        if matrix[i] == [['X','X','X']]  or (matrix[0][1] == 'X' and matrix[1][i] == 'X' and matrix[2][i] == 'X') or (matrix[0][0] == 'X' and matrix[1][1] == 'X' and matrix[2][2] == 'X') or (matrix[0][2] == 'X' and matrix[1][1] == 'X' and matrix[2][0]=='X'):
-            print('Победил первый игрок')
-            break
-        if matrix[i] == [['0', '0', '0']] or (matrix[0][1] == '0' and matrix[1][i] == '0' and matrix[2][i] == '0') or (
-                matrix[0][0] == '0' and matrix[1][1] == '0' and matrix[2][2] == '0') or (
-                matrix[0][2] == '0' and matrix[1][1] == '0' and matrix[2][0] == '0'):
-            print('Победил второй игрок')
-            break
-        else:
-            return True
+        if matrix[i]==['X','X','X'] or matrix[i]==['0','0','0']:
+            print(f"Победил {s}")
+            return False
+    for col in range(3):
+        if (matrix[0][col] == 'X' and matrix[1][col] == 'X' and matrix[2][col] == 'X') or (matrix[0][col] == '0' and matrix[1][col] == '0' and matrix[2][col]=='0'):
+            print(f"Победил {s}")
+            return False
+    if (matrix[0][0]=='X' and matrix[1][1]=='X' and matrix[2][2] =='X') or (matrix[0][0]=='0' and matrix[1][1]=='0' and matrix[2][2] =='0') or (matrix[0][2]=='X' and matrix[1][1]=='X' and matrix[2][0] =='X') or (matrix[0][2]=='0' and matrix[1][1]=='0' and matrix[2][0] =='0'):
+        print(f"Победил {s}")
+        return False
+    else:
+        return True
+
+#счетчик
 n = 1
 
+#Запуск, условие ничьи
 while check(matrix,n):
     if n == 10:
-        print('Draw')
+        print('Ничья')
         break
     place=vvod(n)
     if n % 2 != 0:
@@ -66,10 +78,8 @@ while check(matrix,n):
         n+=1
     else:
         matrix_show(matrix)
-        print('zanyato')
+        print('Поле занято, повторите ввод')
         continue
-
-
 
 
 
