@@ -27,7 +27,7 @@ def vvod(n):
         place = [a,b]
         return place
 
-#присвоение Х или 0
+#изменение массива
 def matrix_change(a,b,s,matrix):
     if matrix[a][b] == ' ':
         matrix[a][b] = s
